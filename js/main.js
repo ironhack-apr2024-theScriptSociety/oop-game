@@ -74,10 +74,24 @@ setInterval(() => {
 
 
 
-// move all obstacles
+// update game
 setInterval(() => {
     obstaclesArr.forEach( (obstacleInstance) => {
+
+        // move obstacle
         obstacleInstance.moveDown();
+
+        // detect collision
+        if (
+            player.positionX < obstacleInstance.positionX + obstacleInstance.width &&
+            player.positionX + player.width > obstacleInstance.positionX &&
+            player.positionY < obstacleInstance.positionY + obstacleInstance.height &&
+            player.positionY + player.height > obstacleInstance.positionY
+        ) {
+            console.log("game over...");
+            location.href = "gameover.html";
+        }
+
     });
 }, 30);
 
